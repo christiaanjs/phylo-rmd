@@ -1,0 +1,14 @@
+Package: phylormd
+Type: Package
+Title: Phylogenetics Reports in R Markdown
+Version: 0.1.0
+Author: Christiaan Swanepoel
+Maintainer: Christiaan Swanepoel <christiaan.j.s@gmail.com>
+Description: Phylogenetics Reports in R Markdown
+    Includes support for BEAST2 analyses and Nextstrain reports.
+License:  GPL-3
+Encoding: UTF-8
+LazyData: true
+Imports: 
+    knitr
+RoxygenNote: 6.1.1
