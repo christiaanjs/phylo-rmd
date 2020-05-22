@@ -6,9 +6,12 @@ Author: Christiaan Swanepoel
 Maintainer: Christiaan Swanepoel <christiaan.j.s@gmail.com>
 Description: Phylogenetics Reports in R Markdown
     Includes support for BEAST2 analyses and Nextstrain reports.
-License:  GPL-3
+License: GPL-3
 Encoding: UTF-8
 LazyData: true
 Imports: 
-    knitr
+    knitr,
+    whisker,
+    urltools,
+    purrr
 RoxygenNote: 6.1.1
