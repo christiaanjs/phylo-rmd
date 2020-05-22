@@ -14,13 +14,13 @@ format_nextstrain_url <- function(tree_url, display_args){
 
 build_nextstrain_header <- function(text, config, display_args){
   tree_url <- resolve_nextstrain_tree(config)
-  whisker::whisker.render("#[{{text}}]({{url}})", list(text=text, url=format_nextstrain_url(tree_url, display_args)))
+  whisker::whisker.render("[{{text}}]({{{url}}})", list(text=text, url=format_nextstrain_url(tree_url, display_args)))
 }
 
 display_header <- function(text, config, display_args=NULL){
   if(config$format == 'nextstrain'){
     build_nextstrain_header(text, config)
   } else {
-    stop(sprintf("Input format %s not known", config$format))
+    stop(sprintf("Input format %s not known", config$format)) # TODO: Implement non-Nextstrain formats
   }
 }

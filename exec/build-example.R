@@ -1,0 +1,1 @@
+knitr::knit("example.Rmd")

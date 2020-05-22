@@ -1,0 +1,15 @@
+---
+title: "Example Nextstrain Report"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+devtools::load_all("..")
+config <- yaml::read_yaml('config.yaml')
+```
+
+# `r build_nextstrain_header("Data", config, list(display="tree", color="location"))`
+
+Our results summarise analyses of 78 full genomes from New Zealand cases.
+In addition 200 further genomes from the global pandemic have been included to provide context for the NZ epidemic.
