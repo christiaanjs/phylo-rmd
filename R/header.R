@@ -1,5 +1,5 @@
 resolve_nextstrain_tree <- function(config){
-  config$tree_url# TODO: Improve this
+  config$dataset
 }
 
 nextstrain_arg_mapping <- list(color="c", display="d") # TODO: More arguments
@@ -12,15 +12,15 @@ format_nextstrain_url <- function(tree_url, display_args){
   purrr::reduce(names(display_args), add_display_argument, display_args=display_args, .init=tree_url)
 }
 
-build_nextstrain_header <- function(text, config, display_args){
+build_nextstrain_header <- function(text, display_args, config){
   tree_url <- resolve_nextstrain_tree(config)
-  whisker::whisker.render("[{{text}}]({{{url}}})", list(text=text, url=format_nextstrain_url(tree_url, display_args)))
+  whisker::whisker.render("# [{{text}}]({{{url}}})", list(text=text, url=format_nextstrain_url(tree_url, display_args)))
 }
 
-display_header <- function(text, config, display_args=NULL){
-  if(config$format == 'nextstrain'){
-    build_nextstrain_header(text, config)
+header <- function(text, display_args=NULL){
+  if(.config$format == 'nextstrain'){
+    build_nextstrain_header(text, display_args, .config)
   } else {
-    stop(sprintf("Input format %s not known", config$format)) # TODO: Implement non-Nextstrain formats
+    stop(sprintf("Input format %s not known", .config$format)) # TODO: Implement non-Nextstrain formats
   }
 }

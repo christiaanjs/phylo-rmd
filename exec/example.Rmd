@@ -1,15 +1,50 @@
 ---
-title: "Example Nextstrain Report"
-output: html_document
+title: "Bayesian phylodynamic analysis of SARS-CoV-2 in New Zealand"
+subtitle: "Discrete trait phylogeography analysis"
+authors:
+  - Walter Xie
+  - Jordan Douglas
+  - David Welch
+  - Remco Bouckaert
+  - Alexei Drummond
+authorLinks:
+  - https://www.cs.auckland.ac.nz/~walter/
+  - https://unidirectory.auckland.ac.nz/people/profile/jordan-douglas
+  - https://www.cs.auckland.ac.nz/~davidw/
+  - https://www.cs.auckland.ac.nz/~remco/
+  - http://alexeidrummond.org
+affiliations: "Centre for Computational Evolution, University of Auckland, New Zealand"
+date: "2020-05-05"
+dataset: "https://nextstrain.org/groups/nz-covid19-private/2020-04-29/discrete-phylogeo/278-time?c=location&d=tree&f_Country=New_Zealand"
+abstract: "This is [the Centre for Computational Evolution's (CCE)](https://www.compevol.auckland.ac.nz/)
+    report on the NZ SARS-CoV-2 epidemic based on currently available `r n_data` sequences."
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-devtools::load_all("..")
-config <- yaml::read_yaml('config.yaml')
+knitr::opts_chunk$set(echo = FALSE)
+library(phylormd)
 ```
 
-# `r build_nextstrain_header("Data", config, list(display="tree", color="location"))`
+`r header("Data", list(display="tree", color="location"))`
 
 Our results summarise analyses of 78 full genomes from New Zealand cases.
 In addition 200 further genomes from the global pandemic have been included to provide context for the NZ epidemic.
+
+`r header("Migrations to New Zealand", list())`
+
+`r start_main_display()`
+
+Figure 3 shows the posterior distribution for the number of migrations from different regions 
+(Asia, Europe, USA, Rest of World) to New Zealand.
+This is an estimate for the number of detected independent introductions into NZ for this sample.
+
+```{r}
+library(dplyr)
+library(ggplot2)
+tibble(x = seq(0, 2*pi, 0.01)) %>% 
+  mutate(y = sin(x)) %>% 
+  ggplot(aes(x, y)) + 
+  geom_line()
+```
+
+`r end_main_display()`
