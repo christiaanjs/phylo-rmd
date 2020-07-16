@@ -21,7 +21,6 @@ abstract: "This is [the Centre for Computational Evolution's (CCE)](https://www.
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
 library(phylormd)
 ```
 

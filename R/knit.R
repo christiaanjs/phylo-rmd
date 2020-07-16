@@ -20,8 +20,8 @@ get_dataset_base_url <- function(dataset){
   urltools::url_compose(url)
 }
 
-render_abstract <- function(abstract, env){
-  knitr::knit(text=abstract, envir=env)
+render_front_matter_field <- function(field, env){
+  knitr::knit(text=field, envir=env)
 }
 
 rebuild_input <- function(front_matter, body){
@@ -34,12 +34,21 @@ rebuild_input <- function(front_matter, body){
   )
 }
 
-render <- function(input, format="nextstrain", image_format="base64", abstract_env=NULL, ...){
+#' @export
+render <- function(
+    input,
+    format="nextstrain",
+    image_format="base64",
+    front_matter_render_fields=NULL,
+    front_matter_env=NULL,
+    ...
+  ){
   input_parsed <- parse_input(input)
 
   front_matter <- input_parsed$front_matter
-  if(!is.null(abstract_env)){
-    front_matter$abstract <- render_abstract(front_matter$abstract, abstract_env)
+
+  for(field in front_matter_render_fields){
+    front_matter[[field]] <- render_front_matter_field(front_matter[[field]], front_matter_env)
   }
 
   config <- list(
@@ -49,6 +58,11 @@ render <- function(input, format="nextstrain", image_format="base64", abstract_e
   envir <- new.env()
   envir$.config <- config
   knitr::render_markdown()
+
+  knitr::opts_chunk$set(echo = FALSE)
+  knitr::opts_chunk$set(message = FALSE)
+
+
   if(image_format == "base64"){
     knitr::opts_knit$set(upload.fun = knitr::image_uri)
     knitr::knit_hooks$set(plot = knitr::hook_plot_html)

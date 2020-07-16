@@ -17,10 +17,12 @@ build_nextstrain_header <- function(text, display_args, config){
   whisker::whisker.render("# [{{text}}]({{{url}}})", list(text=text, url=format_nextstrain_url(tree_url, display_args)))
 }
 
+#' @export
 header <- function(text, display_args=NULL){
-  if(.config$format == 'nextstrain'){
-    build_nextstrain_header(text, display_args, .config)
+  config <- parent.frame()$.config
+  if(config$format == 'nextstrain'){
+    build_nextstrain_header(text, display_args, config)
   } else {
-    stop(sprintf("Input format %s not known", .config$format)) # TODO: Implement non-Nextstrain formats
+    stop(sprintf("Input format %s not known", config$format)) # TODO: Implement non-Nextstrain formats
   }
 }
