@@ -6,7 +6,7 @@ parse_front_matter <- function(front_matter){
 }
 
 parse_input <- function(input){
-  input_lines <- readLines(input)
+  input_lines <- rmarkdown:::read_utf8(input)
   partitions <- rmarkdown:::partition_yaml_front_matter(input_lines)
   list(
     front_matter=parse_front_matter(partitions$front_matter),
