@@ -13,5 +13,8 @@ Imports:
     knitr,
     whisker,
     urltools,
-    purrr
+    purrr,
+    rmarkdown
 RoxygenNote: 6.1.1
+Suggests: 
+    ggplot2
