@@ -17,7 +17,7 @@ affiliations: "Centre for Computational Evolution, University of Auckland, New Z
 date: "2020-05-05"
 dataset: "https://nextstrain.org/groups/nz-covid19-private/2020-04-29/discrete-phylogeo/278-time?c=location&d=tree&f_Country=New_Zealand"
 abstract: "This is [the Centre for Computational Evolution's (CCE)](https://www.compevol.auckland.ac.nz/)
-    report on the NZ SARS-CoV-2 epidemic based on currently available `r n_data` sequences."
+    report on the NZ SARS-CoV-2 epidemic based on currently available `r n_data_nz + n_data_world` sequences."
 ---
 
 ```{r setup, include=FALSE}
@@ -26,8 +26,8 @@ library(phylormd)
 
 `r header("Data", list(display="tree", color="location"))`
 
-Our results summarise analyses of 78 full genomes from New Zealand cases.
-In addition 200 further genomes from the global pandemic have been included to provide context for the NZ epidemic.
+Our results summarise analyses of `r n_data_nz` full genomes from New Zealand cases.
+In addition `r n_data_world` further genomes from the global pandemic have been included to provide context for the NZ epidemic.
 
 `r header("Migrations to New Zealand", list())`
 

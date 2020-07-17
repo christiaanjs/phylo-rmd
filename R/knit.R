@@ -20,8 +20,8 @@ get_dataset_base_url <- function(dataset){
   urltools::url_compose(url)
 }
 
-render_front_matter_field <- function(field, env){
-  knitr::knit(text=field, envir=env)
+render_front_matter_field <- function(field, envir){
+  knitr::knit(text=field, envir=envir)
 }
 
 rebuild_input <- function(front_matter, body){
@@ -40,22 +40,26 @@ render <- function(
     format="nextstrain",
     image_format="base64",
     front_matter_render_fields=NULL,
-    front_matter_env=NULL,
+    envir=NULL,
     ...
   ){
   input_parsed <- parse_input(input)
 
   front_matter <- input_parsed$front_matter
-
+  if(is.null(envir)){
+    envir <- new.env()
+  }
   for(field in front_matter_render_fields){
-    front_matter[[field]] <- render_front_matter_field(front_matter[[field]], front_matter_env)
+    front_matter[[field]] <- render_front_matter_field(front_matter[[field]], envir)
   }
 
   config <- list(
     dataset=get_dataset_base_url(front_matter$dataset),
     format=format
   )
-  envir <- new.env()
+  if(!is.null(envir$.config)){
+    stop('envir must not have a variable called .config')
+  }
   envir$.config <- config
   knitr::render_markdown()
 
