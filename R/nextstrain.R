@@ -1,3 +1,4 @@
+#' @export
 start_main_display <- function(){
   config <- parent.frame()$.config
   if(config$format == "nextstrain"){
@@ -7,6 +8,7 @@ start_main_display <- function(){
   }
 }
 
+#' @export
 end_main_display <- function(){
   config <- parent.frame()$.config
   if(config$format == "nextstrain"){

@@ -55,7 +55,8 @@ render <- function(
 
   config <- list(
     dataset=get_dataset_base_url(front_matter$dataset),
-    format=format
+    format=format,
+    image_format=image_format
   )
   if(!is.null(envir$.config)){
     stop('envir must not have a variable called .config')
@@ -69,6 +70,7 @@ render <- function(
 
   if(image_format == "base64"){
     knitr::opts_knit$set(upload.fun = knitr::image_uri)
+    knitr::opts_chunk$set(out.width = "75%") # Set default plot/image width to 75%
     knitr::knit_hooks$set(plot = knitr::hook_plot_html)
   }
 
