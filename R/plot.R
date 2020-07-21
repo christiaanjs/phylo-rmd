@@ -3,9 +3,10 @@ display_image_nextstrain <- function(path){
 }
 
 #' @export
-display_image <- function(path, format){
-  if(format == 'nextstrain'){
-    display_image_nextstrain(output_path)
+display_image <- function(path){
+  config <- get_config()
+  if(config$format == 'nextstrain'){
+    display_image_nextstrain(path)
   } else {
     stop(sprintf("Input format %s not known", format)) # TODO: Implement non-Nextstrain formats
   }
@@ -19,5 +20,5 @@ display_pdf <- function(path, temp_format="png"){
   magick::image_read_pdf(path) %>%
     magick::image_convert(format=temp_format) %>%
     magick::image_write(output_path)
-  display_image(output_path, config$format)
+  display_image(output_path)
 }

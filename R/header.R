@@ -19,7 +19,7 @@ build_nextstrain_header <- function(text, display_args, config){
 
 #' @export
 header <- function(text, display_args=NULL){
-  config <- parent.frame()$.config
+  config <- get_config()
   if(config$format == 'nextstrain'){
     build_nextstrain_header(text, display_args, config)
   } else {
